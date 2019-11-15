@@ -74,27 +74,27 @@ fi
 MODIFIED_POLICY=`echo $MY_POLICY | sed -e "s/an attempt to write to any file below a set of binary directories/My New Description/g"`
 OUT=`echo $MODIFIED_POLICY | $SCRIPTDIR/../examples/update_policy.py $PYTHON_SDC_TEST_API_TOKEN`
 if [[ $OUT != *"\"description\": \"My New Description\""* ]]; then
-    echo "Could not update policy \"Copy Of Write below binary dir\""
+    echo "Could not update policy \"Write below etc\""
     exit 1
 fi
 
 # Delete the new policy.
-OUT=`$SCRIPTDIR/../examples/delete_policy.py --name "Copy Of Write below binary dir" $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"Copy Of Write below binary dir\""* ]]; then
-    echo "Could not delete policy \"Copy Of Write below binary dir\""
+OUT=`$SCRIPTDIR/../examples/delete_policy.py --name "Write below etc" $PYTHON_SDC_TEST_API_TOKEN`
+if [[ $OUT != *"\"Write below etc\""* ]]; then
+    echo "Could not delete policy \"Write below etc\""
     exit 1
 fi
 
 OUT=`$SCRIPTDIR/../examples/list_policies.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT = *"\"Copy Of Write below binary dir\""* ]]; then
-    echo "After deleting policy Copy Of Write below binary dir, policy was still present?"
+if [[ $OUT = *"\"Write below etc\""* ]]; then
+    echo "After deleting policy Write below etc, policy was still present?"
     exit 1
 fi
 
 # Make a copy again, but this time delete by id
-NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Another Copy Of Write below binary dir/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
+NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Another Write below etc/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
 OUT=`echo $NEW_POLICY | $SCRIPTDIR/../examples/add_policy.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"Another Copy Of Write below binary dir\""* ]]; then
+if [[ $OUT != *"\"Another Write below etc\""* ]]; then
     echo "Could not create new policy"
     exit 1
 fi
@@ -102,14 +102,14 @@ fi
 ID=`echo $OUT | grep -E -o '"id": [^,]+,' | awk '{print $2}' | awk -F, '{print $1}'`
 
 OUT=`$SCRIPTDIR/../examples/delete_policy.py --id $ID $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"Another Copy Of Write below binary dir\""* ]]; then
-    echo "Could not delete policy \"Copy Of Write below binary dir\""
+if [[ $OUT != *"\"Another Write below etc\""* ]]; then
+    echo "Could not delete policy \"Write below etc\""
     exit 1
 fi
 
 OUT=`$SCRIPTDIR/../examples/list_policies.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT = *"\"Another Copy Of Write below binary dir\""* ]]; then
-    echo "After deleting policy Another Copy Of Write below binary dir, policy was still present?"
+if [[ $OUT = *"\"Another Write below etc\""* ]]; then
+    echo "After deleting policy Another Write below etc, policy was still present?"
     exit 1
 fi
 
@@ -163,9 +163,9 @@ if [[ $OUT != *"\"name\": \"Write below binary dir\""* ]]; then
     exit 1
 fi
 
-NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Copy Of Write below binary dir/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
+NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Write below etc/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
 OUT=`echo $NEW_POLICY | $SCRIPTDIR/../examples/add_policy_v1.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"name\": \"Copy Of Write below binary dir\""* ]]; then
+if [[ $OUT != *"\"name\": \"Write below etc\""* ]]; then
     echo "Could not create new policy V1"
     exit 1
 fi
@@ -174,27 +174,27 @@ fi
 MODIFIED_POLICY=`echo $MY_POLICY | sed -e "s/an attempt to write to any file below a set of binary directories/My New Description/g"`
 OUT=`echo $MODIFIED_POLICY | $SCRIPTDIR/../examples/update_policy_v1.py $PYTHON_SDC_TEST_API_TOKEN`
 if [[ $OUT != *"\"description\": \"My New Description\""* ]]; then
-    echo "Could not update policy V1 \"Copy Of Write below binary dir\""
+    echo "Could not update policy V1 \"Write below etc\""
     exit 1
 fi
 
 # Delete the new policy.
-OUT=`$SCRIPTDIR/../examples/delete_policy_v1.py --name "Copy Of Write below binary dir" $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"name\": \"Copy Of Write below binary dir\""* ]]; then
-    echo "Could not delete policy V1 \"Copy Of Write below binary dir\""
+OUT=`$SCRIPTDIR/../examples/delete_policy_v1.py --name "Write below etc" $PYTHON_SDC_TEST_API_TOKEN`
+if [[ $OUT != *"\"name\": \"Write below etc\""* ]]; then
+    echo "Could not delete policy V1 \"Write below etc\""
     exit 1
 fi
 
 OUT=`$SCRIPTDIR/../examples/list_policies_v1.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT = *"\"name\": \"Copy Of Write below binary dir\""* ]]; then
-    echo "After deleting policy V1 Copy Of Write below binary dir, policy was still present?"
+if [[ $OUT = *"\"name\": \"Write below etc\""* ]]; then
+    echo "After deleting policy V1 Write below etc, policy was still present?"
     exit 1
 fi
 
 # Make a copy again, but this time delete by id
-NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Another Copy Of Write below binary dir/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
+NEW_POLICY=`echo $MY_POLICY | sed -e "s/Write below binary dir/Another Write below etc/g" | sed -e 's/"id": [0-9]*,//' | sed -e 's/"version": [0-9]*/"version": null/'`
 OUT=`echo $NEW_POLICY | $SCRIPTDIR/../examples/add_policy_v1.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"name\": \"Another Copy Of Write below binary dir\""* ]]; then
+if [[ $OUT != *"\"name\": \"Another Write below etc\""* ]]; then
     echo "Could not create new policy V1"
     exit 1
 fi
@@ -202,14 +202,14 @@ fi
 ID=`echo $OUT | grep -E -o '"id": [^,]+,' | awk '{print $2}' | awk -F, '{print $1}'`
 
 OUT=`$SCRIPTDIR/../examples/delete_policy_v1.py --id $ID $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT != *"\"name\": \"Another Copy Of Write below binary dir\""* ]]; then
-    echo "Could not delete policy V1 \"Copy Of Write below binary dir\""
+if [[ $OUT != *"\"name\": \"Another Write below etc\""* ]]; then
+    echo "Could not delete policy V1 \"Write below etc\""
     exit 1
 fi
 
 OUT=`$SCRIPTDIR/../examples/list_policies_v1.py $PYTHON_SDC_TEST_API_TOKEN`
-if [[ $OUT = *"\"name\": \"Another Copy Of Write below binary dir\""* ]]; then
-    echo "After deleting policy V1 Another Copy Of Write below binary dir, policy was still present?"
+if [[ $OUT = *"\"name\": \"Another Write below etc\""* ]]; then
+    echo "After deleting policy V1 Another Write below etc, policy was still present?"
     exit 1
 fi
 
